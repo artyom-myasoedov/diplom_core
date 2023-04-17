@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'ru.vsu.cs'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'org.slf4j:slf4j-log4j12:2.0.6'
+    implementation 'org.apache.logging.log4j:log4j-api:2.6.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.6.1'
+    implementation 'redis.clients:jedis:4.3.0'
+    implementation 'org.reflections:reflections:0.10.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'ru.vsu.cs'
+            artifactId = 'diplom-core'
+            version = '1.0'
+
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = new URL("file:///Users/ruaaaxs/.m2/repository")
+            name = 'lcl'
+        }
+    }
+}
+
+
+test {
+    useJUnitPlatform()
+}
